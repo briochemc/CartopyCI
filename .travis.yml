@@ -10,10 +10,6 @@ before_script:
   - julia -e 'using Pkg; Pkg.add("Conda"); using Conda; Conda.add("matplotlib"); Conda.add("cartopy")';
   - julia -e 'using Pkg; Pkg.add("PyCall"); ENV["PYTHON"]=""; Pkg.build("PyCall")'
 
-matrix:
-  allow_failures:
-  - julia: nightly
-
 notifications:
   email: false
 
