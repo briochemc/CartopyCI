@@ -8,8 +8,8 @@ julia:
 
 script: # modified the default
   - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
-  - julia -e 'Pkg.add("Conda"); using Conda; Conda.add("matplotlib"); Conda.add("cartopy")';
-  - julia -e 'Pkg.clone(pwd()); Pkg.build("CartopyCI"); Pkg.test("CartopyCI"; coverage=false)';
+  - julia -e 'using Pkg; Pkg.add("Conda"); using Conda; Conda.add("matplotlib"); Conda.add("cartopy")';
+  - julia -e 'using Pkg; Pkg.clone(pwd()); Pkg.build("CartopyCI"); Pkg.test("CartopyCI"; coverage=false)';
 
 matrix:
   allow_failures:
