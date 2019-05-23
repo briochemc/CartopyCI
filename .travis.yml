@@ -6,8 +6,11 @@ os:
 julia:
   - nightly
 
-# Uncomment the following lines to allow failures on nightly julia
-# (tests will run but not make your overall status red)
+script: # modified the default
+  - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
+  - julia -e 'Pkg.add("Conda"); using Conda; Conda.add("matplotlib"); Conda.add("cartopy")';
+  - julia -e 'Pkg.clone(pwd()); Pkg.build("CartopyCI"); Pkg.test("CartopyCI"; coverage=false)';
+
 matrix:
   allow_failures:
   - julia: nightly
